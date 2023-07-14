@@ -13,6 +13,7 @@ describe("Piece", function () {
         expect(lightPiece.color).toEqual("white");
       });
     });
+    
     describe("#flip", function () {
       it("should switch colors when flipped", function () {
         darkPiece.flip();

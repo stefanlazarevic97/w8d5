@@ -33,7 +33,7 @@ Piece.prototype.toString = function () {
 };
 
 // DON'T TOUCH THIS CODE
-if (typeof window === 'undefined'){
+// if (typeof window === 'undefined'){
     module.exports = Piece;
-}
+// }
 // DON'T TOUCH THIS CODE

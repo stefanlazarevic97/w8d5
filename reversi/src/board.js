@@ -1,9 +1,8 @@
 // DON'T TOUCH THIS CODE
-if (typeof window === 'undefined'){
+// if (typeof window === 'undefined'){
   const Piece = require("./piece");
-}
+// }
 // DON'T TOUCH THIS CODE
-
 
 /**
  * Returns a 2D array (8 by 8) with two black pieces at [3, 4] and [4, 3]
@@ -31,11 +30,7 @@ function Board () {
   this.grid = _makeGrid();
 }
 
-Board.DIRS = [
-  [ 0,  1], [ 1,  1], [ 1,  0],
-  [ 1, -1], [ 0, -1], [-1, -1],
-  [-1,  0], [-1,  1]
-];
+Board.DIRS = [[0, 1], [1, 1], [1, 0], [1, -1], [0, -1], [-1, -1], [-1, 0], [-1, 1]];
 
 /**
  * Checks if a given position is on the Board.
@@ -190,12 +185,19 @@ Board.prototype.isOver = function () {
  * Prints a string representation of the Board to the console.
  */
 
-Board.prototype.print = function () {
+Board.prototype.print = function (turn) {
+    console.log("  0 1 2 3 4 5 6 7");
+    
     for (let i = 0; i < this.grid.length; i++) {
-        let rowOutput = "";
+        let rowOutput = `${i} `;
+
         for (let j = 0; j < this.grid[i].length; j++) {
             if (typeof this.grid[i][j] === "undefined") {
-                rowOutput += "_ ";
+                if (this.validMove([i, j], turn)) {
+                    rowOutput += "* ";
+                } else {
+                    rowOutput += "_ ";
+                }
             } else {
                 rowOutput += this.grid[i][j].toString() + " ";
             }
@@ -204,18 +206,8 @@ Board.prototype.print = function () {
     }
 };
 
-//     for (i = 0; i < this.grid.length; i++) {
-//       this.grid[i].map((el) => {
-//           if (el instanceof Piece) {
-//             el.toString()
-//         } else {
-//           "_"
-//         }
-//       });
-//     }
-
 // DON'T TOUCH THIS CODE
-if (typeof window === 'undefined'){
+// if (typeof window === 'undefined'){
   module.exports = Board;
-}
+// }
 // DON'T TOUCH THIS CODE
