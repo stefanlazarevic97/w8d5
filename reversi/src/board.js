@@ -158,14 +158,24 @@ Board.prototype.placePiece = function (pos, color) {
  * the Board for a given color.
  */
 Board.prototype.validMoves = function (color) {
+    let validPositions = [];
 
+    for (i = 0; i < this.grid.length; i++) {
+        for (j = 0; j < this.grid.length; j++) {
+            if (this.validMove([i, j], color)) {
+                validPositions.push([i, j]);
+            }
+        }   
+    }
+
+    return validPositions;
 };
 
 /**
  * Checks if there are any valid moves for the given color.
  */
 Board.prototype.hasMove = function (color) {
-    
+    return (this.validMoves(color).length > 0);
 };
 
 /**
@@ -173,15 +183,36 @@ Board.prototype.hasMove = function (color) {
  * the black player are out of moves.
  */
 Board.prototype.isOver = function () {
-    
+    return (!this.hasMove("black") || !this.hasMove("white"));
 };
 
 /**
  * Prints a string representation of the Board to the console.
  */
+
 Board.prototype.print = function () {
-    
+    for (let i = 0; i < this.grid.length; i++) {
+        let rowOutput = "";
+        for (let j = 0; j < this.grid[i].length; j++) {
+            if (typeof this.grid[i][j] === "undefined") {
+                rowOutput += "_ ";
+            } else {
+                rowOutput += this.grid[i][j].toString() + " ";
+            }
+        }
+        console.log(rowOutput);
+    }
 };
+
+//     for (i = 0; i < this.grid.length; i++) {
+//       this.grid[i].map((el) => {
+//           if (el instanceof Piece) {
+//             el.toString()
+//         } else {
+//           "_"
+//         }
+//       });
+//     }
 
 // DON'T TOUCH THIS CODE
 if (typeof window === 'undefined'){
